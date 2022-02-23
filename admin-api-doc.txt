@@ -1,0 +1,197 @@
+/*
+	WRTeam Developers
+*/
+
+API URL -->> 
+	http://eshopweb.store/admin/app/v1/api/{METHOD_NAME}  - (all APIs in one file only)
+
+---------------------------------------------------------------------------
+Defined API Methods:-
+---------------------------------------------------------------------------
+
+1. login
+2  get_orders
+3. update_order_status
+4. update_order_item_status
+5. get_categories
+6. get_products
+7. get_customers
+8. get_transactions
+9. get_statistics
+10. forgot_password
+11. delete_order
+12. get_delivery_boys
+13. verify_user
+14. get_settings
+15. update_fcm
+16. send_message
+17. edit_ticket
+18. get_ticket_types
+19. get_tickets
+20. get_messages
+21. get_cities
+22. get_areas_by_city_id
+23. delete_order_receipt
+24. get_order_tracking
+25. edit_order_tracking
+26. update_receipt_status
+27. get_return_requests
+28. update_return_request
+29. manage_delivery_boy_cash_collection
+30. get_delivery_boy_cash_collection
+------------------------------------------
+What parameters to be Passed?  See here >>
+------------------------------------------
+
+
+Use POST method to pass the parameters
+
+1.login
+    mobile: 9874565478
+    password: 12345678
+    fcm_id: FCM_ID //{ optional }
+
+2. get_orders
+    id:101 { optional }
+    user_id:101 { optional }
+    active_status:received  {received,delivered,cancelled,processed,returned}     // optional
+    start_date:2020-09-07 or 2020/09/07 { optional }
+    end_date:2021-03-15 or 2021/03/15 { optional }
+    search:keyword { optional }
+    limit:25            // { default - 25 } optional
+    offset:0            // { default - 0 } optional
+    sort: id / date_added // { default - id } optional
+    order:DESC/ASC      // { default - DESC } optional
+    download_invoice:0 // { default - 0 } optional        
+
+
+3. update_order_status
+    order_id:1
+    status : received / processed / shipped / delivered / cancelled / returned
+    delivery_boy_id: 15 {optional}
+
+4. update_order_item_status
+    order_item_id:1
+    status : received / processed / shipped / delivered / cancelled / returned
+
+5. get_categories
+    id:15               // optional
+    limit:25            // { default - 25 } optional
+    offset:0            // { default - 0 } optional
+    sort:               id / name // { default - id } optional
+    order:DESC/ASC      // { default - ASC } optional
+    has_child_or_item:false { default - true}  optional
+
+6. get_products
+    id:101              // optional
+    category_id:29      // optional
+    user_id:15          // optional
+    search:keyword      // optional
+    tags:multiword tag1, tag2, another tag      // optional
+    flag:low/sold      // optional
+    attribute_value_ids : 34,23,12 // { Use only for filteration } optional
+    limit:25            // { default - 25 } optional
+    offset:0            // { default - 0 } optional
+    sort:p.id / p.date_added / pv.price // { default - p.id } optional
+    order:DESC/ASC      // { default - DESC } optional
+    is_similar_products:1 // { default - 0 } optional
+    top_rated_product: 1 // { default - 0 } optional
+    show_only_active_products:false { default - true } optional
+
+7. get_customers
+    id: 1001                // { optional}
+    search : Search keyword // { optional }
+    limit:25                // { default - 25 } optional
+    offset:0                // { default - 0 } optional
+    sort: id/username/email/mobile/area_name/city_name/date_created // { default - id } optional
+    order:DESC/ASC          // { default - DESC } optional
+
+8. get_transactions
+    user_id:73              // { optional}
+    id: 1001                // { optional}
+    transaction_type:transaction / wallet // { default - transaction } optional
+    type : COD / stripe / razorpay / paypal / paystack / flutterwave - for transaction | credit / debit - for wallet // { optional }
+    search : Search keyword // { optional }
+    limit:25                // { default - 25 } optional
+    offset:0                // { default - 0 } optional
+    sort: id / date_created // { default - id } optional
+    order:DESC/ASC          // { default - DESC } optional
+
+9. get_statistics
+
+10. forgot_password
+    mobile_no:7894561235            
+    new: pass@123
+
+11. delete_order
+    order_id:1
+
+12. get_delivery_boys
+    id: 1001                // { optional}
+    search : Search keyword // { optional }
+    limit:25                // { default - 25 } optional
+    offset:0                // { default - 0 } optional
+    sort: id/username/email/mobile/area_name/city_name/date_created // { default - id } optional
+    order:DESC/ASC          // { default - DESC } optional
+
+13. verify_user
+    mobile: 9874565478
+    email: test@gmail.com // { optional }
+
+14. get_settings
+    type : payment_method // { default : all  } optional            
+    user_id:  15 { optional }
+
+15. update_fcm
+    user_id:12
+    fcm_id: FCM_ID
+
+16. delete_order_receipt
+    id=57 
+
+17. get_order_tracking
+    limit:25            // { default - 25 } optional
+    offset:0            // { default - 0 } optional
+    sort:               // { id } optional
+    order:DESC/ASC      // { default - DESC } optional
+    search:value        // {optional} 
+
+18. edit_order_tracking
+    order_id:57 
+    order_item_id:123
+    courier_agency:asd agency
+    tracking_id:t_id123
+    url:http://test.com
+
+19. update_receipt_status
+
+    order_id:57 
+    user_id:123
+    status:1        // { 0:pending|1:rejected|2:accepted }  
+
+27. get_return_requests
+    limit:25            // { default - 25 } optional
+    offset:0            // { default - 0 } optional
+    sort:               // { id } optional
+    order:DESC/ASC      // { default - DESC } optional
+    search:value        // {optional} 
+    
+28. update_return_request
+    return_request_id:57 
+    order_item_id:123 
+    status:1        // { 0:pending|1:accepted|2:rejected }  
+    update_remarks:  //{optional}
+
+29. manage_delivery_boy_cash_collection
+    delivery_boy_id:57 
+    amount:123 
+    message:test  //{optional}
+
+30. get_delivery_boy_cash_collection
+    delivery_boy_id:15  // {optional}
+    status:             // {delivery_boy_cash (delivery boy collected) | delivery_boy_cash_collection (admin collected)}
+    limit:25            // { default - 25 } optional
+    offset:0            // { default - 0 } optional
+    sort:               // { id } optional
+    order:DESC/ASC      // { default - DESC } optional
+    search:value        // {optional} 
